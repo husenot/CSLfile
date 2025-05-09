@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-GB">
+  <info>
+    <title>Defence S&amp;T Technical Bulletin</title>
+    <id>http://www.zotero.org/styles/defence-st-technical-bulletin</id>
+    <link href="http://www.zotero.org/styles/defence-st-technical-bulletin" rel="self"/>
+    <author>
+      <name>Nurul Husna Mukhtar (UUM)</name>
+    </author>
+    <category citation-format="author-date"/>
+    <updated>2025-05-08T12:00:00+08:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name 
+        form="short"
+        delimiter=", "
+        et-al-min="3"
+        et-al-use-first="1"
+        et-al-subsequent-min="3"
+        et-al-subsequent-use-first="1"
+        and="symbol"
+        delimiter-precedes-last="never"/>
+      <et-al font-style="italic"/>
+    </names>
+  </macro>
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="editor">
+    <names variable="editor">
+      <name and="text" delimiter=", " initialize-with=". " name-as-sort-order="all"/>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" font-style="italic"/>
+  </macro>
+
+  <macro name="container-title">
+    <text variable="container-title" font-style="italic"/>
+  </macro>
+
+  <macro name="pages">
+    <group>
+      <text term="page" form="short" suffix=". "/>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <macro name="access">
+    <group>
+      <text value="Available online at: "/>
+      <text variable="URL"/>
+      <text value=" (Last access date: "/>
+      <date variable="accessed">
+        <date-part name="day" suffix=" "/>
+        <date-part name="month" suffix=" "/>
+        <date-part name="year"/>
+      </date>
+      <text value=")"/>
+    </group>
+  </macro>
+
+  <citation>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author"/>
+        <text macro="year"/>
+      </group>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" line-spacing="2" entry-spacing="0">
+    <sort>
+      <key variable="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout>
+      <choose>
+
+        <if type="book">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <group prefix="(" suffix=")">
+              <text macro="year"/>
+            </group>
+            <text variable="title"/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+            </group>
+          </group>
+        </if>
+
+        <else-if type="chapter">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <group prefix="(" suffix=")">
+              <text macro="year"/>
+            </group>
+            <text variable="title"/>
+            <group delimiter=" ">
+              <text value="In" font-style="italic"/>
+              <names variable="editor" delimiter=", ">
+                <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+              </names>
+              <text value="(Eds.),"/>
+              <text macro="container-title" font-style="italic" suffix="."/>
+              <group delimiter=", ">
+                <text variable="publisher"/>
+                <text variable="publisher-place"/>
+              </group>
+              <text variable="page" prefix=", pp. " suffix="."/>
+            </group>
+          </group>
+        </else-if>
+
+        <else-if type="article-journal">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="symbol" delimiter-precedes-last="always"/>
+            </names>
+            <group prefix="(" suffix=")">
+              <text macro="year"/>
+            </group>
+            <text variable="title"/>
+            <group delimiter=", ">
+              <text variable="container-title-short" font-style="italic"/>
+              <group delimiter=": ">
+                <text variable="volume" font-weight="bold"/>
+                <text variable="page"/>
+              </group>
+            </group>
+          </group>
+        </else-if>
+
+        <else-if type="webpage">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year"/>
+            <text variable="title"/>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <else-if type="thesis">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year"/>
+            <text macro="title"/>
+            <group delimiter=", ">
+              <text variable="genre"/>
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+            </group>
+          </group>
+        </else-if>
+
+        <else>
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year"/>
+            <text variable="title"/>
+            <text macro="container-title"/>
+          </group>
+        </else>
+
+      </choose>
+    </layout>
+  </bibliography>
+</style>
