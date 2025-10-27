@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0"
-       class="in-text" default-locale="en-GB"
-       font-family="Times New Roman" font-size="11">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-GB">
   <info>
-    <title>Defence S&amp;T Technical Bulletin (Journal Style)</title>
-    <id>http://www.zotero.org/styles/defence-st-technical-bulletin-custom</id>
-    <link href="http://www.zotero.org/styles/defence-st-technical-bulletin-custom" rel="self"/>
+    <title>Defence S&amp;T Technical Bulletin (Journal Style, Valid CSL)</title>
+    <id>http://www.zotero.org/styles/defence-st-technical-bulletin-valid</id>
+    <link href="http://www.zotero.org/styles/defence-st-technical-bulletin-valid" rel="self"/>
     <author>
       <name>Nurul Husna Mukhtar (UUM)</name>
     </author>
@@ -17,15 +15,14 @@
 
   <macro name="author">
     <names variable="author">
-      <name
-        form="short"
-        delimiter=", "
-        et-al-min="3"
-        et-al-use-first="1"
-        et-al-subsequent-min="3"
-        et-al-subsequent-use-first="1"
-        and="symbol"
-        delimiter-precedes-last="never"/>
+      <name form="short"
+            delimiter=", "
+            et-al-min="3"
+            et-al-use-first="1"
+            et-al-subsequent-min="3"
+            et-al-subsequent-use-first="1"
+            and="symbol"
+            delimiter-precedes-last="never"/>
       <et-al font-style="italic"/>
     </names>
   </macro>
@@ -51,12 +48,12 @@
   </macro>
 
   <macro name="editor-label-paren">
-    <!-- Outputs (Ed.) or (Eds.), capitalised, with trailing comma -->
+    <!-- Outputs (Ed.) or (Eds.), followed by comma -->
     <label variable="editor" form="short" text-case="capitalize-first" prefix=" (" suffix=".),"/>
   </macro>
 
   <macro name="book-title">
-    <!-- Books: Title Case and italic -->
+    <!-- Books: Title Case & italic -->
     <text variable="title" text-case="title" font-style="italic"/>
   </macro>
 
@@ -70,13 +67,13 @@
     <text variable="title" text-case="sentence"/>
   </macro>
 
-  <!-- Journal title: print first non-empty of container-title-short or container-title -->
+  <!-- Journal title: first non-empty of container-title-short, container-title -->
   <macro name="journal-title-abbrev">
     <text variable="container-title-short container-title" font-style="italic"/>
   </macro>
 
   <macro name="book-container-title">
-    <!-- Book title (container for chapters): Title Case & italic -->
+    <!-- Book container: Title Case & italic -->
     <text variable="container-title" text-case="title" font-style="italic"/>
   </macro>
 
@@ -100,7 +97,7 @@
 
   <!-- ===== Citation ===== -->
 
-  <citation font-family="Times New Roman" font-size="11">
+  <citation>
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <text macro="author"/>
@@ -111,8 +108,7 @@
 
   <!-- ===== Bibliography ===== -->
 
-  <bibliography font-family="Times New Roman" font-size="11"
-                hanging-indent="true" line-spacing="2" entry-spacing="0">
+  <bibliography hanging-indent="true" line-spacing="2" entry-spacing="0">
     <sort>
       <key variable="author"/>
       <key variable="issued"/>
@@ -157,7 +153,7 @@
           </group>
         </else-if>
 
-        <!-- Journal / Serials -->
+        <!-- Journals / Serials -->
         <else-if type="article-journal">
           <group delimiter=". " suffix=".">
             <names variable="author" delimiter=", ">
@@ -168,7 +164,7 @@
             <group delimiter=", ">
               <text macro="journal-title-abbrev"/>
               <group delimiter=": ">
-                <text variable="volume" font-weight="bold"/>
+                <text variable="volume"/>
                 <text variable="page"/>
               </group>
             </group>
@@ -187,8 +183,8 @@
           </group>
         </else-if>
 
-        <!-- Unpublished Materials (e.g., theses, reports, documents) -->
-        <else-if type="thesis report manuscript">
+        <!-- Unpublished Materials (thesis/report/manuscript) -->
+        <else-if type="thesis report manuscript" match="any">
           <group delimiter=". " suffix=".">
             <names variable="author" delimiter=", ">
               <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
@@ -196,13 +192,8 @@
             <text macro="year-paren"/>
             <text variable="title"/>
             <group delimiter=", ">
-              <!-- e.g., PhD Thesis -->
               <text variable="genre"/>
-              <!-- Department (enter in 'authority' field if available) -->
-              <text variable="authority"/>
-              <!-- University / institution -->
               <text variable="publisher"/>
-              <!-- Place -->
               <text variable="publisher-place"/>
             </group>
           </group>
