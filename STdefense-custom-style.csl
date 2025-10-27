@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-GB">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0"
+       class="in-text" default-locale="en-GB"
+       font-family="Times New Roman" font-size="11">
   <info>
     <title>Defence S&amp;T Technical Bulletin (Journal Style)</title>
     <id>http://www.zotero.org/styles/defence-st-technical-bulletin-custom</id>
@@ -36,4 +38,196 @@
     </group>
   </macro>
 
-  <macro name="yea
+  <macro name="year-bare">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="editor-names">
+    <names variable="editor" delimiter=", ">
+      <name name-as-sort-order="all" form="long" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+    </names>
+  </macro>
+
+  <macro name="editor-label-paren">
+    <!-- Outputs (Ed.) or (Eds.), capitalised, with trailing comma -->
+    <label variable="editor" form="short" text-case="capitalize-first" prefix=" (" suffix=".),"/>
+  </macro>
+
+  <macro name="book-title">
+    <!-- Books: Title Case and italic -->
+    <text variable="title" text-case="title" font-style="italic"/>
+  </macro>
+
+  <macro name="chapter-title">
+    <!-- Chapters: sentence case, not italic -->
+    <text variable="title" text-case="sentence"/>
+  </macro>
+
+  <macro name="article-title">
+    <!-- Journal articles: sentence case, not italic -->
+    <text variable="title" text-case="sentence"/>
+  </macro>
+
+  <!-- Journal title: use container-title-short if present; else fallback to container-title -->
+  <macro name="journal-title-abbrev">
+    <choose>
+      <if variable="container-title-short">
+        <text variable="container-title-short" font-style="italic"/>
+      </if>
+      <else>
+        <text variable="container-title" font-style="italic"/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="book-container-title">
+    <!-- Book title (container for chapters): Title Case & italic -->
+    <text variable="container-title" text-case="title" font-style="italic"/>
+  </macro>
+
+  <macro name="pages-simple">
+    <text variable="page"/>
+  </macro>
+
+  <macro name="access">
+    <group>
+      <text value="Available online at: "/>
+      <text variable="URL"/>
+      <text value=" (Last access date: "/>
+      <date variable="accessed">
+        <date-part name="day" suffix=" "/>
+        <date-part name="month" form="long" suffix=" "/>
+        <date-part name="year"/>
+      </date>
+      <text value=")"/>
+    </group>
+  </macro>
+
+  <!-- ===== Citation ===== -->
+
+  <citation font-family="Times New Roman" font-size="11">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author"/>
+        <text macro="year-bare"/>
+      </group>
+    </layout>
+  </citation>
+
+  <!-- ===== Bibliography ===== -->
+
+  <bibliography font-family="Times New Roman" font-size="11"
+                hanging-indent="true" line-spacing="2" entry-spacing="0">
+    <sort>
+      <key variable="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout>
+      <choose>
+
+        <!-- Books -->
+        <if type="book">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text macro="book-title"/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+            </group>
+          </group>
+        </if>
+
+        <!-- Book Chapters -->
+        <else-if type="chapter">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text macro="chapter-title"/>
+            <group delimiter=" ">
+              <text value="In"/>
+              <text macro="editor-names"/>
+              <text macro="editor-label-paren"/>
+              <text macro="book-container-title" suffix="."/>
+              <group delimiter=", ">
+                <text variable="publisher"/>
+                <text variable="publisher-place"/>
+              </group>
+              <text macro="pages-simple" prefix=", pp. " suffix="."/>
+            </group>
+          </group>
+        </else-if>
+
+        <!-- Journal / Serials -->
+        <else-if type="article-journal">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="symbol" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text macro="article-title"/>
+            <group delimiter=", ">
+              <text macro="journal-title-abbrev"/>
+              <group delimiter=": ">
+                <text variable="volume" font-weight="bold"/>
+                <text variable="page"/>
+              </group>
+            </group>
+          </group>
+        </else-if>
+
+        <!-- Online Sources -->
+        <else-if type="webpage">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text variable="title"/>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <!-- Unpublished Materials (e.g., theses, reports, documents) -->
+        <else-if type="thesis report manuscript">
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text variable="title"/>
+            <group delimiter=", ">
+              <!-- e.g., PhD Thesis -->
+              <text variable="genre"/>
+              <!-- Department (enter in 'authority' field if available) -->
+              <text variable="authority"/>
+              <!-- University / institution -->
+              <text variable="publisher"/>
+              <!-- Place -->
+              <text variable="publisher-place"/>
+            </group>
+          </group>
+        </else-if>
+
+        <!-- Fallback -->
+        <else>
+          <group delimiter=". " suffix=".">
+            <names variable="author" delimiter=", ">
+              <name form="long" name-as-sort-order="all" initialize-with="." delimiter=", " and="text" delimiter-precedes-last="always"/>
+            </names>
+            <text macro="year-paren"/>
+            <text variable="title"/>
+            <text variable="container-title" font-style="italic"/>
+          </group>
+        </else>
+
+      </choose>
+    </layout>
+  </bibliography>
+</style>
