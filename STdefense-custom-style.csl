@@ -70,16 +70,9 @@
     <text variable="title" text-case="sentence"/>
   </macro>
 
-  <!-- Journal title: use container-title-short if present; else fallback to container-title -->
+  <!-- Journal title: print first non-empty of container-title-short or container-title -->
   <macro name="journal-title-abbrev">
-    <choose>
-      <if variable="container-title-short">
-        <text variable="container-title-short" font-style="italic"/>
-      </if>
-      <else>
-        <text variable="container-title" font-style="italic"/>
-      </else>
-    </choose>
+    <text variable="container-title-short container-title" font-style="italic"/>
   </macro>
 
   <macro name="book-container-title">
