@@ -165,7 +165,7 @@
             <group delimiter=", ">
               <text macro="journal-title-abbrev"/>
               <group delimiter=": ">
-                <text variable="volume"/>
+                <text variable="volume" font-weight="bold"/>
                 <text variable="page"/>
               </group>
             </group>
@@ -221,4 +221,3 @@
     </layout>
   </bibliography>
 </style>
-
